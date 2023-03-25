@@ -1,32 +1,36 @@
-package fa.traning.Algorithm;
+package fa.traning.Algorithm.Array;
 
 import java.util.*;
 
 /**
  * B0:Kiến thức về vấn đề xử lí đã có chưa -> Có: Kiến thức mảng, Set
+ *
  * B1: Xác định vấn đề cần xử lí: Tìm các phần tử trùng lặp có trong mảng
  * +Input: arr = {1, 22, 3, 14, 14, 33, 22, 11, 1, 1, 1}
  * +Output: arr{1, 22, 14}
+ *
  * B2: Liệt kê ra các hướng giải quyết vấn đề
  * +Sử dụng mảng: => Sử dụng 2 vòng lặp for
  * Vòng for 1: Duyệt từ đầu mảng đến cuối mảng - 1
  * Vòng for 2: Duyệt từ vị trí thứ i + 1 cho đến cuối mảng, mục đích để so sánh i với các phần tử còn lại trong mảng
  * Kiểm tra xem nếu arr[i] == với arr[j] => Phần tử đó bị trùng lặp => Add vào list
  * Check xem list đã tồn tại phần tử trùng lặp chưa, nếu chưa thì mới add
- * <p>
+ *
  * +Sử dụng set : => Cho các phần tử trong mảng lần lượt vào Set
  * Nếu set không cho add, tư là phần tử đó là phần tử bị trùng lăp => Add vào list mới
  * Tuy nhiên nếu cứ add các phần tử không được add vào Set thì list của ta cũng bị trùng lặp
  * Vì vậy ta phải làm thêm 1 bước nữa: Kiểm tra trong list đã có phần tử đó hay chưa, chưa có ms cho add list
- * <p>
+ *
  * +Sử dụng map cho bài toán hiển thị số lần trùng lặp của mỗi phần tử
  * Khởi tạo map, Duyệt các phần tử trong mảng lần lượt từ 0 -> arr.length
  * Kiểm tra key của map đã tồn tại chưa, nếu chưa Add key = arr[i] , value = 1
  * Nếu key tồn tại put ghi đè lại key = arr[i], và value + 1.
+ *
  * B3: Đánh giá, chọn phương án giải quyết tối ưu
  * Sử dụng Mảng: Thời gian O(n²) do phải sử dụng 2 vòng for
  * Sử dụng Set : Thời gian O(n)  do chỉ cần sử dụng 1 vòng for
  * Sử dụng Map : Thời gian O(n)
+ *
  * B4: Code
  */
 public class FindDuplicateNumberInArray {
@@ -95,8 +99,40 @@ public class FindDuplicateNumberInArray {
         }
 
     }
+    /** Bài toán: Tìm phần tử trùng lặp đầu tiên trong mảng
+     * Ý tưởng: Cho tất cả các phần tử vào Set, phần tử nào đã có trong Set return luôn
+     * Nếu chưa có trong Set thì add mới.
+     * Nếu không có phần tử trùng lặp, return -1
+     * O(n)
+    * */
+    private int findFirstDuplicateNumber(int arr[]){
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < arr.length; i++){
+            if (set.contains(arr[i])){
+                return arr[i];
+            }else {
+                set.add(arr[i]);
+            }
+        }
+        return -1;
+    }
 
-    /**
+    /**Sử dụng 2 vòng For để tìm ra phần tử trùng lặp đầu tiên trong mảng
+     * Duyệt mảng và so sánh i với j, nếu = nhau => Return luôn
+     * O(n2)
+    * */
+    private int findFirstDuplicateNumberLoop(int arr[]) {
+        for (int i =0; i < arr.length -1; i++ ){
+            for (int j = i + 1; j < arr.length; j++){
+                if (arr[i] == arr[j]){
+                    return arr[i];
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**==============================================EXTENDS=======================================
      * Extends: Xoá các phần tử trùng lặp trong mảng
      * Các hướng giải quyết
      * +)Đơn giản nhất  : Ném Các phần tử trong Arr vào Hashset -> OK Done
