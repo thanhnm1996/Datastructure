@@ -50,14 +50,14 @@ public class FindTwoSumEqualTargetSum {
         }
     }
 
-    public int[] twoSum(int[] nums, int target) {
+    public int[] twoSum(int[] arr, int target) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
+        for (int i = 0; i < arr.length; i++) {
+            int complement = target - arr[i];
             if (map.containsKey(complement)) {
                 return new int[]{map.get(complement), i};
             }
-            map.put(nums[i], i);
+            map.put(arr[i], i);
         }
         throw new IllegalArgumentException("No two sum solution");
     }

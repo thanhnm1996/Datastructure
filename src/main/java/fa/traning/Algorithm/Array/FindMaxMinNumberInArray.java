@@ -34,7 +34,7 @@ public class FindMaxMinNumberInArray {
         System.out.println("Min: " + min);
     }
 
-    private void finMaxMinSort(int[] arr) {
+    private void finMaxMinStream(int[] arr) {
         int max = Arrays.stream(arr).max().getAsInt();
         int min = Arrays.stream(arr).min().getAsInt();
         System.out.println("Max: " + max);
@@ -63,7 +63,7 @@ public class FindMaxMinNumberInArray {
         FindMaxMinNumberInArray find = new FindMaxMinNumberInArray();
         find.findMaxMinLoopFor(arr);
 
-        find.finMaxMinSort(arr);
+        find.finMaxMinStream(arr);
 
         find.findMaxLargestTwoNumber(arr);
 

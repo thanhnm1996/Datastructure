@@ -99,6 +99,24 @@ public class FindDuplicateNumberInArray {
         }
 
     }
+
+    private void countDuplicateByLoop(int[] arr) {
+        boolean[] printed = new boolean[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            if (!printed[i]) {
+                int count = 1;
+                for (int j = i + 1; j < arr.length; j++) {
+                    if (arr[i] == arr[j]) {
+                        count++;
+                        printed[j] = true;
+                    }
+                }
+                System.out.println(arr[i] + " xuất hiện " + count + " lần");
+                printed[i] = true;
+            }
+        }
+    }
+
     /** Bài toán: Tìm phần tử trùng lặp đầu tiên trong mảng
      * Ý tưởng: Cho tất cả các phần tử vào Set, phần tử nào đã có trong Set return luôn
      * Nếu chưa có trong Set thì add mới.
@@ -122,7 +140,7 @@ public class FindDuplicateNumberInArray {
      * O(n2)
     * */
     private int findFirstDuplicateNumberLoop(int arr[]) {
-        for (int i =0; i < arr.length -1; i++ ){
+        for (int i =0; i < arr.length; i++ ){
             for (int j = i + 1; j < arr.length; j++){
                 if (arr[i] == arr[j]){
                     return arr[i];
@@ -151,7 +169,7 @@ public class FindDuplicateNumberInArray {
 
     private void removeDuplicateArrayListInArr(int arr[]) {
         List<Integer> arrayList = new ArrayList();
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (!arrayList.contains(arr[i])) {
                 arrayList.add(arr[i]);
             }
@@ -161,7 +179,7 @@ public class FindDuplicateNumberInArray {
 
     /**
      *Sử dụng 2 vòng lặp for, Mảng có 10 phần tử
-     * Vòng lặp for 1 duyệt từ đầu Arr[0] cho đến phần tử thứ 9 của mảng Arr[8]
+     * Vòng lặp for 1 duyệt từ đầu Arr[0] cho đến cuối mảng
      * Vòng lặp for thứ 2 chạy từ Arr[i+1] cho đến phần tử thứ 10 của mảng Arr[9]
      * So sánh Arr[i] == Arr[j], Nếu bằng nhau tại vị trí Arr[j] nào đó.
      * Ta sẽ gán k = j Duyệt một vòng for mới Với mục đích thay đổi giá trị của phần tử trùng lặp bằng
@@ -172,7 +190,7 @@ public class FindDuplicateNumberInArray {
     private void removeDuplicateInArrLoop(int arr[]) {
         int n = arr.length;
 
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (arr[i] == arr[j]) {
                     // Dịch chuyển các phần tử trong mảng lên một bậc để xóa phần tử trùng lặp
@@ -180,6 +198,7 @@ public class FindDuplicateNumberInArray {
                         arr[k] = arr[k + 1];
                     }
                     n--;
+                    j--;
                 }
             }
         }
